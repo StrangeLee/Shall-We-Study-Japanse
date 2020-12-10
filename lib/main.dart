@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
   final cupertinoTheme = CupertinoThemeData(
       primaryColor: Colors.green,
       barBackgroundColor: Colors.greenAccent,
-      scaffoldBackgroundColor: Colors.white
+      scaffoldBackgroundColor: Colors.white,
   );
 
   @override

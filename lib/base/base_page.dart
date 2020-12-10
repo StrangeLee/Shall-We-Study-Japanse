@@ -26,7 +26,7 @@ mixin BasicPage<Page extends BasePage> on BaseState<Page> {
       body: PlatformScaffold(
         iosContentBottomPadding: false,
         iosContentPadding: false,
-        appBar: _platformAppBar(),
+        // appBar: _platformAppBar(),
         // bottomNavBar: platformBottomNavBar(),
         body: _body(),
       ),
@@ -34,7 +34,10 @@ mixin BasicPage<Page extends BasePage> on BaseState<Page> {
   }
 
   Widget _body() {
-    return userBody();
+    return Container(
+      color: Colors.white,
+      child: userBody(),
+    );
   }
 
   Widget _platformAppBar() {
