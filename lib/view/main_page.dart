@@ -3,7 +3,11 @@ import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:shall_we_study_japanese/base/base_page.dart';
 import 'package:flutter/material.dart';
 import 'package:shall_we_study_japanese/base/util_widget.dart';
+import 'package:shall_we_study_japanese/view/add_page.dart';
+import 'package:shall_we_study_japanese/view/list_page.dart';
 import 'package:shall_we_study_japanese/view/paint/custom_paint.dart';
+import 'package:shall_we_study_japanese/view/setting_page.dart';
+import 'package:shall_we_study_japanese/view/word_page.dart';
 
 class MainPage extends BasePage {
   @override
@@ -48,20 +52,20 @@ class _MainPageState extends BaseState<MainPage> with BasicPage {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         _roundButton(
-            '단어 외우기',
-                () => print('abc')
+          '단어 외우기',
+          () => this.naviPush(WordPage()),
         ),
         _roundButton(
-            '단어 관리',
-                () => print('abc')
+          '단어 관리',
+          () => this.naviPush(AddPage()),
         ),
         _roundButton(
-            '단어 목록',
-                () => print('abc')
+          '단어 목록',
+          () => this.naviPush(ListPage()),
         ),
         _roundButton(
-            '설정',
-                () => print('abc')
+          '설정',
+          () => this.naviPush(SettingPage()),
         ),
       ],
     );
