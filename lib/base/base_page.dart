@@ -66,6 +66,15 @@ mixin BasicPage<Page extends BasePage> on BaseState<Page> {
   }
 
   void naviPushReplacement(BasePage page) {
+    Navigator.pushReplacement(
+        context,
+        platformPageRoute(
+          context: context,
+          builder: (context) => page,
+        ));
+  }
+
+  void naviPush(BasePage page) {
     Navigator.push(
         context,
         platformPageRoute(
