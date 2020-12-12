@@ -26,7 +26,7 @@ mixin BasicPage<Page extends BasePage> on BaseState<Page> {
       body: PlatformScaffold(
         iosContentBottomPadding: false,
         iosContentPadding: false,
-        // appBar: _platformAppBar(),
+        appBar: _platformAppBar(),
         // bottomNavBar: platformBottomNavBar(),
         body: _body(),
       ),

@@ -1,7 +1,7 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
-import 'package:shall_we_study_japanese/base/base_page.dart';
 import 'package:flutter/material.dart';
+import 'package:shall_we_study_japanese/base/base_page.dart';
 import 'package:shall_we_study_japanese/base/util_widget.dart';
 import 'package:shall_we_study_japanese/view/add_page.dart';
 import 'package:shall_we_study_japanese/view/list_page.dart';
@@ -9,38 +9,35 @@ import 'package:shall_we_study_japanese/view/paint/custom_paint.dart';
 import 'package:shall_we_study_japanese/view/setting_page.dart';
 import 'package:shall_we_study_japanese/view/word_page.dart';
 
-class MainPage extends BasePage {
+class MainPage extends StatefulWidget {
   @override
   _MainPageState createState() => _MainPageState();
 }
 
-class _MainPageState extends BaseState<MainPage> with BasicPage {
+class _MainPageState extends State<MainPage> {
 
   @override
-  String appbarTitle() {
-    return '메인 화면';
-  }
-
-  @override
-  Widget userBody() {
-    return Container(
-      color: Colors.greenAccent,
-      child: CustomPaint(
-        painter: BackgroundPainter(),
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              UtilWidget.textView(
-                text: 'Learning Language',
-                textStyle: TextStyle(
-                  fontSize: 40.0,
-                  fontWeight: FontWeight.bold,
+  Widget build(BuildContext context) {
+    return PlatformScaffold(
+      body: Container(
+        color: Colors.greenAccent,
+        child: CustomPaint(
+          painter: BackgroundPainter(),
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                UtilWidget.textView(
+                  text: 'Learning Language',
+                  textStyle: TextStyle(
+                    fontSize: 40.0,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
-              ),
-              _buttonList(),
-            ],
+                _buttonList(),
+              ],
+            ),
           ),
         ),
       ),
@@ -53,19 +50,19 @@ class _MainPageState extends BaseState<MainPage> with BasicPage {
       children: [
         _roundButton(
           '단어 외우기',
-          () => this.naviPush(WordPage()),
+          () => _navPush(WordPage()),
         ),
         _roundButton(
           '단어 관리',
-          () => this.naviPush(AddPage()),
+          () => _navPush(AddPage()),
         ),
         _roundButton(
           '단어 목록',
-          () => this.naviPush(ListPage()),
+          () => _navPush(ListPage()),
         ),
         _roundButton(
           '설정',
-          () => this.naviPush(SettingPage()),
+          () => _navPush(SettingPage()),
         ),
       ],
     );
@@ -84,5 +81,9 @@ class _MainPageState extends BaseState<MainPage> with BasicPage {
       function: function,
       radiusValue: 5.0,
     );
+  }
+
+  _navPush(Widget page) {
+    Navigator.of(context).push(platformPageRoute(context: context, builder: (context) => page,));
   }
 }
