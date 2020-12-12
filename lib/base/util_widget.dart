@@ -47,15 +47,40 @@ class UtilWidget {
     );
   }
 
-  static Widget defaultButton({
-    @required Widget child,
-    @required Function function,
-    Color color,
+  static Widget textField({
+    @required TextEditingController controller,
+    @required String hintText,
+    @required EdgeInsetsGeometry padding,
+    @required TextStyle textStyle,
+    TextInputType textInputType,
+    BoxDecoration boxDecoration,
+    int maxLength,
+    int maxLines
   }) {
-    return PlatformButton(
-      child: child,
-      onPressed: function,
-      color: color,
+    if (maxLines == null) {
+      maxLines = 1;
+    }
+
+    return Padding(
+      padding: padding,
+      child: PlatformTextField(
+        maxLines: maxLines,
+        maxLength: maxLength,
+        keyboardType: textInputType,
+        controller: controller,
+        material: (context, platform) => MaterialTextFieldData(
+          decoration: InputDecoration(
+            alignLabelWithHint: true,
+            hintText: hintText,
+            hintStyle: textStyle,
+          ),
+        ),
+        cupertino: (context, platform) => CupertinoTextFieldData(
+          placeholder: hintText,
+          placeholderStyle: textStyle,
+          decoration: boxDecoration,
+        ),
+      ),
     );
   }
 }
