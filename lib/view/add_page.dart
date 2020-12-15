@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
+import 'package:shall_we_study_japanese/base/base_dialog.dart';
 import 'package:shall_we_study_japanese/base/base_page.dart';
 import 'package:shall_we_study_japanese/base/custom_text_style.dart';
 import 'package:shall_we_study_japanese/base/util_widget.dart';
@@ -34,7 +35,7 @@ class _AddPageState extends BaseState<AddPage> with BasicPage {
             children: [
               UtilWidget.roundedButton(
                 child: PlatformText(
-                  this.defaultText,
+                  '등록하기',
                 ),
                 function: () => _getInputResult(),
                 radiusValue: 20.0,
@@ -54,39 +55,64 @@ class _AddPageState extends BaseState<AddPage> with BasicPage {
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        UtilWidget.textField(
+        _textField(
+          hint: '원어',
           controller: originalController,
-          hintText: '원어',
-          padding: EdgeInsets.all(8.0),
-          textStyle: CustomTextStyle.defaultText,
-          boxDecoration: BoxDecoration(
-            borderRadius: BorderRadius.all(
-              Radius.circular(10.0)
-            ),
-            border: Border.all(
-              color: Colors.black12,
-              width: 1.0
-            )
-          )
         ),
-        UtilWidget.textField(
+        _textField(
+          hint: '뜻(의미)',
           controller: meaningController,
-          hintText: '뜻(의미)',
-          padding: EdgeInsets.all(8.0),
-          textStyle: CustomTextStyle.defaultText,
         ),
-        UtilWidget.textField(
+        _textField(
+          hint: '메모',
           controller: memoController,
-          hintText: '메모',
           maxLines: 5,
-          padding: EdgeInsets.all(8.0),
-          textStyle: CustomTextStyle.defaultText,
         ),
       ],
     );
   }
 
+  Widget _textField({
+    @required String hint,
+    @required  TextEditingController controller,
+    int maxLines
+  }) {
+    return UtilWidget.textField(
+        controller: controller,
+        hintText: hint,
+        padding: EdgeInsets.all(8.0),
+        textStyle: CustomTextStyle.defaultText,
+        maxLines: maxLines,
+        boxDecoration: BoxDecoration(
+            borderRadius: BorderRadius.all(
+                Radius.circular(10.0)
+            ),
+            border: Border.all(
+                color: Colors.black12,
+                width: 1.0
+            )
+        )
+    );
+  }
+
+  // 등록하기 버튼 onPress Event
   _getInputResult() {
     print('${originalController.text} & ${meaningController.text} & ${memoController.text} ');
+
+    List<String> textList = List<String>();
+    textList.add(originalController.text);
+    textList.add(meaningController.text);
+    textList.add(memoController.text);
+
+    // Dec 14 2020, Todo : 다이얼로그 반복 현상 수정하기 -> 
+    textList.forEach((element) {
+      if (element == '') {
+        return BaseDialog.showNotifyDialog(
+          context: context,
+          title: '알림',
+          content: '기입하지 않은 항목이 있습니다.\n확인해주세요.',
+        );
+      }
+    });
   }
 }
