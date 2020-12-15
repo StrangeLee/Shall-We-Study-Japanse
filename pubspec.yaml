@@ -33,6 +33,7 @@ dependencies:
   path_provider: ^1.2.0
   path: ^1.6.2
   toast: ^0.1.5
+  provider: ^4.3.2+3
 
 dev_dependencies:
   flutter_test:
