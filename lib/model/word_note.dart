@@ -12,14 +12,14 @@ class WordNote {
   factory WordNote.fromJson(Map<String, dynamic> json) => WordNote(
     id: json['id'],
     memo: json['memo'],
-    originalWord: json['originalWord'],
-    translationWord: json['translationWord']
+    originalWord: json['original_word'],
+    translationWord: json['translation_word']
   );
 
   Map<String, dynamic> toJson() => {
     "id": id,
     "memo": memo,
-    "originalWord": originalWord,
-    "translationWord": translationWord,
+    "original_word": originalWord,
+    "translation_word": translationWord,
   };
 }
