@@ -12,13 +12,16 @@ class _WordPageState extends BaseState<WordPage> with BasicPage {
 
   @override
   String appbarTitle() {
-    return 'af';
+    return '단어 외우기';
   }
 
   @override
   Widget userBody() {
+    print(this.provider.getWords.toString());
     return Center(
-      child: UtilWidget.textView(text: defaultText),
+      child: UtilWidget.textView(
+        text: this.defaultText,
+      ),
     );
   }
 }

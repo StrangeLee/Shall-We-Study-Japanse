@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
+import 'package:provider/provider.dart';
+import 'package:shall_we_study_japanese/provider/word_memo_provider.dart';
 
 abstract class BasePage extends StatefulWidget {
   BasePage({Key key}) : super(key: key);
@@ -16,9 +18,12 @@ mixin BasicPage<Page extends BasePage> on BaseState<Page> {
 
   String get defaultText => 'abc';
 
+  WordMemoProvider provider;
+
   @override
   Widget build(BuildContext context) {
     isFinalPage = Navigator.canPop(context);
+    provider = Provider.of<WordMemoProvider>(context, listen: false);
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
