@@ -99,20 +99,20 @@ class _AddPageState extends BaseState<AddPage> with BasicPage {
   _getInputResult() {
     print('${originalController.text} & ${meaningController.text} & ${memoController.text} ');
 
-    List<String> textList = List<String>();
-    textList.add(originalController.text);
-    textList.add(meaningController.text);
-    textList.add(memoController.text);
+    bool isNull = this.provider.checkNullWords(
+      original: originalController.text,
+      meaning: meaningController.text,
+      memo: memoController.text,
+    );
 
-    // Dec 14 2020, Todo : 다이얼로그 반복 현상 수정하기 -> 
-    textList.forEach((element) {
-      if (element == '') {
-        return BaseDialog.showNotifyDialog(
-          context: context,
-          title: '알림',
-          content: '기입하지 않은 항목이 있습니다.\n확인해주세요.',
-        );
-      }
-    });
+    if (isNull) {
+      BaseDialog.showNotifyDialog(
+        context: context,
+        title: '알림',
+        content: '기입하지 않은 항목이 있습니다.\n확인해주세요.',
+      );
+    }
+
+    // Dec 14 2020, Todo : 다이얼로그 반복 현상 수정하기 ->
   }
 }
