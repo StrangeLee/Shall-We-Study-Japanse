@@ -17,7 +17,7 @@ class WordMemoProvider with ChangeNotifier {
     String memo
   }) {
     if (original == '' || meaning == '') {
-      return false;
+      return true;
     } else {
       WordNote wordNote = WordNote(
         originalWord: original,
@@ -27,7 +27,7 @@ class WordMemoProvider with ChangeNotifier {
 
       DB().insertWord(wordNote);
       notifyListeners();
-      return true;
+      return false;
     }
   }
 
