@@ -22,8 +22,10 @@ mixin BasicPage<Page extends BasePage> on BaseState<Page> {
 
   @override
   Widget build(BuildContext context) {
-    isFinalPage = Navigator.canPop(context);
-    provider = Provider.of<WordMemoProvider>(context, listen: false);
+    setState(() {
+      isFinalPage = Navigator.canPop(context);
+      provider = Provider.of<WordMemoProvider>(context, listen: true);
+    });
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -70,7 +72,7 @@ mixin BasicPage<Page extends BasePage> on BaseState<Page> {
     );
   }
 
-  void naviPushReplacement(BasePage page) {
+  void naviPushReplacement(Widget page) {
     Navigator.pushReplacement(
         context,
         platformPageRoute(
@@ -79,7 +81,7 @@ mixin BasicPage<Page extends BasePage> on BaseState<Page> {
         ));
   }
 
-  void naviPush(BasePage page) {
+  void naviPush(Widget page) {
     Navigator.push(
         context,
         platformPageRoute(
