@@ -82,7 +82,7 @@ class _AddPageState extends BaseState<AddPage> with BasicPage {
         controller: controller,
         hintText: hint,
         padding: EdgeInsets.all(8.0),
-        textStyle: CustomTextStyle.defaultText,
+        hintStyle: CustomTextStyle.defaultText,
         maxLines: maxLines,
         boxDecoration: BoxDecoration(
             borderRadius: BorderRadius.all(
