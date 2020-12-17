@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
@@ -51,11 +50,15 @@ class UtilWidget {
     @required TextEditingController controller,
     @required String hintText,
     @required EdgeInsetsGeometry padding,
-    @required TextStyle textStyle,
+    @required TextStyle hintStyle,
     TextInputType textInputType,
     BoxDecoration boxDecoration,
     int maxLength,
-    int maxLines
+    int maxLines,
+    Color materialBackground,
+    EdgeInsetsGeometry contentPadding,
+    TextAlign align,
+    TextStyle textStyle,
   }) {
     if (maxLines == null) {
       maxLines = 1;
@@ -68,17 +71,23 @@ class UtilWidget {
         maxLength: maxLength,
         keyboardType: textInputType,
         controller: controller,
+        textAlign: align,
         material: (context, platform) => MaterialTextFieldData(
+          style: textStyle,
           decoration: InputDecoration(
             alignLabelWithHint: true,
             hintText: hintText,
-            hintStyle: textStyle,
+            hintStyle: hintStyle,
+            fillColor: materialBackground,
+            contentPadding: contentPadding,
           ),
         ),
         cupertino: (context, platform) => CupertinoTextFieldData(
           placeholder: hintText,
-          placeholderStyle: textStyle,
+          placeholderStyle: hintStyle,
           decoration: boxDecoration,
+          padding: contentPadding,
+          style: textStyle,
         ),
       ),
     );
