@@ -9,6 +9,7 @@ class BaseDialog {
     @required BuildContext context,
     @required String title,
     @required String content,
+    Function function
   }) {
     showPlatformDialog(
       context: context,
@@ -17,8 +18,11 @@ class BaseDialog {
         content: PlatformText(content),
         actions: [
           PlatformDialogAction(
-            child: PlatformText('닫기'),
-            onPressed: () => Navigator.pop(context),
+            child: PlatformText('확인'),
+            onPressed: () {
+              Navigator.pop(context);
+              function();
+            },
           ),
         ],
       ),
