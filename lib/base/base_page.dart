@@ -18,6 +18,9 @@ mixin BasicPage<Page extends BasePage> on BaseState<Page> {
 
   String get defaultText => 'abc';
 
+  double get deviceWidth => MediaQuery.of(context).size.width;
+  double get deviceHeight => MediaQuery.of(context).size.height;
+
   WordMemoProvider provider;
 
   @override
