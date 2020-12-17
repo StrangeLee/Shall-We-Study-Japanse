@@ -7,6 +7,7 @@ import 'package:shall_we_study_japanese/base/base_dialog.dart';
 import 'package:shall_we_study_japanese/base/base_page.dart';
 import 'package:shall_we_study_japanese/base/custom_text_style.dart';
 import 'package:shall_we_study_japanese/base/util_widget.dart';
+import 'package:shall_we_study_japanese/view/main_page.dart';
 
 class AddPage extends BasePage {
   @override
@@ -110,6 +111,13 @@ class _AddPageState extends BaseState<AddPage> with BasicPage {
         context: context,
         title: '알림',
         content: '기입하지 않은 항목이 있습니다.\n확인해주세요.',
+      );
+    } else {
+      BaseDialog.showNotifyDialog(
+        context: context,
+        title: '알림',
+        content: '단어를 추가하였습니다.',
+        function: () => this.naviPushReplacement(MainPage())
       );
     }
 
