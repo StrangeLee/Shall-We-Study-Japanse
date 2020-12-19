@@ -120,7 +120,5 @@ class _AddPageState extends BaseState<AddPage> with BasicPage {
         function: () => this.naviPushReplacement(MainPage())
       );
     }
-
-    // Dec 14 2020, Todo : 다이얼로그 반복 현상 수정하기 ->
   }
 }
