@@ -7,7 +7,7 @@ import 'package:shall_we_study_japanese/view/add_page.dart';
 import 'package:shall_we_study_japanese/view/list_page.dart';
 import 'package:shall_we_study_japanese/view/paint/custom_paint.dart';
 import 'package:shall_we_study_japanese/view/setting_page.dart';
-import 'package:shall_we_study_japanese/view/word_page.dart';
+import 'package:shall_we_study_japanese/view/quiz_page.dart';
 
 class MainPage extends StatefulWidget {
   @override
@@ -50,7 +50,7 @@ class _MainPageState extends State<MainPage> {
       children: [
         _roundButton(
           '단어 외우기',
-          () => _navPush(WordPage()),
+          () => _navPush(QuizPage()),
         ),
         _roundButton(
           '단어 관리',
