@@ -6,10 +6,7 @@ class WordMemoProvider with ChangeNotifier {
 
   List<WordNote> _words = [];
 
-  List<WordNote> get getWords {
-    _fetchWordList();
-    return _words;
-  }
+  Future<List<WordNote>> get getWords => DB().getAllWords();
 
   bool checkNullWords({
     @required String original,

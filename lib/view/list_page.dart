@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:shall_we_study_japanese/base/base_page.dart';
 import 'package:shall_we_study_japanese/base/util_widget.dart';
 import 'package:shall_we_study_japanese/model/word_note.dart';
@@ -18,14 +19,25 @@ class _ListPageState extends BaseState<ListPage> with BasicPage {
 
   @override
   Widget userBody() {
-    var wordList = this.provider.getWords;
     return Center(
       child: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: ListView.builder(
-          itemCount: wordList.length,
-          itemBuilder: (context, index) => _wordListView(wordList[index]),
-        ),
+        child: FutureBuilder(
+          future: this.provider.getWords,
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              var list = snapshot.data.toList();
+              return ListView.builder(
+                itemCount: list.length,
+                itemBuilder: (context, index) => _wordListView(list[index]),
+              );
+            } else {
+              return Center(
+                child: PlatformCircularProgressIndicator(),
+              );
+            }
+          },
+        )
       ),
     );
   }
