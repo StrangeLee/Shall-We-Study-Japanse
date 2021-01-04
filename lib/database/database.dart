@@ -8,7 +8,6 @@ final String TABLE_NAME = 'word_note';
 
 class DB {
   DB._();
-
   static final DB _db = DB._();
   factory DB() => _db;
 
@@ -53,8 +52,7 @@ class DB {
   Future<List<WordNote>> getAllWords() async {
     final db = await database;
     var res = await db.query(TABLE_NAME);
-    List<WordNote> list =
-    res.isNotEmpty ? res.map((c) =>WordNote.fromJson(c)).toList() : [];
+    List<WordNote> list = res.isNotEmpty ? res.map((c) => WordNote.fromJson(c)).toList() : [];
 
     return list;
   }
