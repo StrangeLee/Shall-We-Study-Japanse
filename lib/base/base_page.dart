@@ -25,20 +25,21 @@ mixin BasicPage<Page extends BasePage> on BaseState<Page> {
 
   @override
   Widget build(BuildContext context) {
-    setState(() {
-      isFinalPage = Navigator.canPop(context);
-      provider = Provider.of<WordMemoProvider>(context, listen: true);
-    });
+    isFinalPage = Navigator.canPop(context);
+    provider = Provider.of<WordMemoProvider>(context, listen: true);
 
-    return Scaffold(
-      resizeToAvoidBottomInset: false,
-      resizeToAvoidBottomPadding: false,
-      body: PlatformScaffold(
-        iosContentBottomPadding: false,
-        iosContentPadding: false,
-        appBar: _platformAppBar(),
-        // bottomNavBar: platformBottomNavBar(),
-        body: _body(),
+    return WillPopScope(
+      onWillPop: () async => false,
+      child: Scaffold(
+        resizeToAvoidBottomInset: false,
+        resizeToAvoidBottomPadding: false,
+        body: PlatformScaffold(
+          iosContentBottomPadding: false,
+          iosContentPadding: false,
+          appBar: _platformAppBar(),
+          // bottomNavBar: platformBottomNavBar(),
+          body: _body(),
+        ),
       ),
     );
   }
