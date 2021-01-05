@@ -1,27 +1,32 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:shall_we_study_japanese/base/base_dialog.dart';
 import 'package:shall_we_study_japanese/base/custom_text_style.dart';
+import 'package:shall_we_study_japanese/base/util_function.dart';
 import 'package:shall_we_study_japanese/base/util_widget.dart';
 import 'package:shall_we_study_japanese/model/word_note.dart';
+import 'package:shall_we_study_japanese/provider/word_memo_provider.dart';
+import 'package:shall_we_study_japanese/view/main_page.dart';
+import 'package:shall_we_study_japanese/view/quiz_page.dart';
 import 'package:toast/toast.dart';
 
 // Jan, 4, 2021 Todo : 문제 성공 시 화면 전환 및 완료 페이지 만들기
 
 class QuizWidget extends StatefulWidget {
-  final List<WordNote> list;
+  final WordNote item;
   final int mark;
 
-  const QuizWidget({Key key, this.list, this.mark}) : super(key: key);
+  const QuizWidget({Key key, this.item, this.mark}) : super(key: key);
 
   @override
-  _QuizWidgetState createState() => _QuizWidgetState(list, mark);
+  _QuizWidgetState createState() => _QuizWidgetState(item, mark);
 }
 
 class _QuizWidgetState extends State<QuizWidget> {
-  List<WordNote> list;
+  WordNote item;
   int mark;
 
-  _QuizWidgetState(this.list, this.mark);
+  _QuizWidgetState(this.item, this.mark);
 
   TextEditingController controller = TextEditingController();
 
@@ -50,7 +55,7 @@ class _QuizWidgetState extends State<QuizWidget> {
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: UtilWidget.textView(
-                        text: list[this.mark].originalWord,
+                        text: item.originalWord,
                         textStyle: CustomTextStyle.quizText,
                       ),
                     ),
@@ -94,7 +99,7 @@ class _QuizWidgetState extends State<QuizWidget> {
             padding: EdgeInsets.only(bottom: 16.0),
             child: UtilWidget.roundedButton(
               child: UtilWidget.textView(text: '정답 확인하기'),
-              function: () => _isAnswer(list[mark].translationWord, controller.text),
+              function: () => _isAnswer(item.translationWord, controller.text),
               radiusValue: 20.0,
             ),
           ),
@@ -107,8 +112,24 @@ class _QuizWidgetState extends State<QuizWidget> {
     if (correct != answer) {
       Toast.show('삐빅 오답입니다.', context);
     } else {
-      Toast.show('삐빅 정답입니다.', context);
+      print('mark : ${this.mark}');
+      var length = WordMemoProvider().getListSize + 1;
 
+      if (this.mark < length) {
+        UtilFunction.pushReplaceNavigator(
+            context,
+            QuizPage(
+              marks: this.mark + 1,
+            )
+        );
+      } else {
+        BaseDialog.showNotifyDialog(
+          context: context,
+          title: 'You good boy',
+          content: '문제를 모두 푸셨습니다.',
+          function: () => UtilFunction.pushReplaceNavigator(context, MainPage()),
+        );
+      }
     }
   }
 }

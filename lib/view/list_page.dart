@@ -23,7 +23,7 @@ class _ListPageState extends BaseState<ListPage> with BasicPage {
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: FutureBuilder(
-          future: this.provider.getWords,
+          future: this.provider.getFutureWords,
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               var list = snapshot.data.toList();

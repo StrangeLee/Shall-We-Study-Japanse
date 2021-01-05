@@ -50,10 +50,12 @@ class _MainPageState extends State<MainPage> {
       children: [
         _roundButton(
           '단어 외우기',
-          () => _navPush(QuizPage()),
+          () => _navPush(QuizPage(
+            marks: 0,
+          )),
         ),
         _roundButton(
-          '단어 관리',
+          '단어 등록',
           () => _navPush(AddPage()),
         ),
         _roundButton(

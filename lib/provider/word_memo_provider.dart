@@ -4,9 +4,21 @@ import 'package:shall_we_study_japanese/model/word_note.dart';
 
 class WordMemoProvider with ChangeNotifier {
 
+  static bool isFirst = true;
+
   List<WordNote> _words = [];
 
-  Future<List<WordNote>> get getWords => DB().getAllWords();
+  int get getListSize => _words.length;
+
+  Future<List<WordNote>> get getFutureWords {
+    _fetchWordList();
+    return DB().getAllWords();
+  }
+
+  List<WordNote> get getWords {
+    _words.shuffle();
+    return _words;
+  }
 
   bool checkNullWords({
     @required String original,
@@ -36,5 +48,11 @@ class WordMemoProvider with ChangeNotifier {
   _fetchWordList() async {
     _words = await DB().getAllWords();
     notifyListeners();
+  }
+
+  List<WordNote> reloadingWordList({WordNote item}) {
+    _words.remove(item);
+    notifyListeners();
+    return _words;
   }
 }
