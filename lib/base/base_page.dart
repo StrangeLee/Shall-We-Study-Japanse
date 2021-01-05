@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:provider/provider.dart';
+import 'package:shall_we_study_japanese/base/util_function.dart';
 import 'package:shall_we_study_japanese/provider/word_memo_provider.dart';
 
 abstract class BasePage extends StatefulWidget {
@@ -77,21 +78,11 @@ mixin BasicPage<Page extends BasePage> on BaseState<Page> {
   }
 
   void naviPushReplacement(Widget page) {
-    Navigator.pushReplacement(
-        context,
-        platformPageRoute(
-          context: context,
-          builder: (context) => page,
-        ));
+    UtilFunction.pushReplaceNavigator(context, page);
   }
 
   void naviPush(Widget page) {
-    Navigator.push(
-        context,
-        platformPageRoute(
-          context: context,
-          builder: (context) => page,
-        ));
+    UtilFunction.pushNavigator(context, page);
   }
 
   Widget getImage(String path) {
