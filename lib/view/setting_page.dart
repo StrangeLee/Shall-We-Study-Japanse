@@ -16,6 +16,11 @@ class _SettingPageState extends BaseState<SettingPage> with BasicPage {
   }
 
   @override
+  List<Widget> trailingActions() {
+    return null;
+  }
+
+  @override
   Widget userBody() {
     return Center(
       child: UtilWidget.textView(text: defaultText),

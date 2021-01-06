@@ -74,6 +74,7 @@ mixin BasicPage<Page extends BasePage> on BaseState<Page> {
         ),
       ),
       title: Text(appbarTitle()),
+      trailingActions: trailingActions(),
     );
   }
 
@@ -99,4 +100,5 @@ mixin BasicPage<Page extends BasePage> on BaseState<Page> {
   }
 
   Widget userBody();
+  List<Widget> trailingActions();
 }

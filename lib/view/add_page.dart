@@ -26,6 +26,11 @@ class _AddPageState extends BaseState<AddPage> with BasicPage {
   }
 
   @override
+  List<Widget> trailingActions() {
+    return null;
+  }
+
+  @override
   Widget userBody() {
     return Center(
       child: Column(
