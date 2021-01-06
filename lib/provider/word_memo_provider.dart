@@ -42,6 +42,13 @@ class WordMemoProvider with ChangeNotifier {
 
   deleteWord(int id) {
     DB().deleteWord(id);
+    _fetchWordList();
+    notifyListeners();
+  }
+
+  deleteAllWord() {
+    DB().deleteAllWordNote();
+    _fetchWordList();
     notifyListeners();
   }
 
